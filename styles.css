@@ -1,20 +1,21 @@
 /* ============================================================
    Teacher's Day — shared design tokens
-   Two worlds: a quiet terminal/code world, and a warm paper world.
-   The whole piece is the transition between them.
+   Two worlds: a themed "opening world" (per subject) and one
+   shared warm paper world for the greeting itself. The whole
+   piece is the transition between them.
    ============================================================ */
 
 :root {
-  /* code world */
-  --ink-dark:      #10121A;
-  --panel-dark:    #171A24;
-  --panel-line:    #262B3A;
-  --code-text:     #C7D0E0;
-  --code-dim:      #6B7387;
-  --code-gold:     #D9A85C;
-  --code-sage:     #8FB89A;
+  /* default / computer-science world theme */
+  --world-bg:      #10121A;
+  --world-panel:   #171A24;
+  --world-edge:    #262B3A;
+  --world-text:    #C7D0E0;
+  --world-dim:     #6B7387;
+  --world-a:       #D9A85C; /* primary accent (keywords, caret) */
+  --world-b:       #8FB89A; /* secondary accent (values) */
 
-  /* paper world */
+  /* paper world — same for every subject, on purpose */
   --paper:         #F3ECDD;
   --paper-edge:    #E9DFC9;
   --ink-warm:      #2C2418;
@@ -27,6 +28,66 @@
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
+/* ---------------- per-subject world themes ---------------- */
+
+.stage[data-subject="maths"] {
+  --world-bg:    #16211A;
+  --world-panel: #1F2E24;
+  --world-edge:  #33473A;
+  --world-text:  #E4E7DE;
+  --world-dim:   #86A08A;
+  --world-a:     #E3D08A;
+  --world-b:     #9FC7A3;
+}
+
+.stage[data-subject="science"] {
+  --world-bg:    #0D171A;
+  --world-panel: #132327;
+  --world-edge:  #22383D;
+  --world-text:  #CFE3E2;
+  --world-dim:   #6E9391;
+  --world-a:     #8FD1CB;
+  --world-b:     #C9A66B;
+}
+
+.stage[data-subject="hindi"] {
+  --world-bg:    #1B140D;
+  --world-panel: #241A10;
+  --world-edge:  #3B2C1B;
+  --world-text:  #EAD9BE;
+  --world-dim:   #9C8563;
+  --world-a:     #D3A947;
+  --world-b:     #C97B4A;
+}
+
+.stage[data-subject="english"] {
+  --world-bg:    #15171C;
+  --world-panel: #F1E7D2;
+  --world-edge:  #DCCBA6;
+  --world-text:  #2B2418;
+  --world-dim:   #8A7B5C;
+  --world-a:     #8B3A3A;
+  --world-b:     #5B4A32;
+}
+
+.stage[data-subject="sst"] {
+  --world-bg:    #171310;
+  --world-panel: #241E16;
+  --world-edge:  #3A3020;
+  --world-text:  #E8DDC7;
+  --world-dim:   #9C917A;
+  --world-a:     #C08A4E;
+  --world-b:     #7A8FA0;
+}
+
+/* Hindi's title/message/closing need a Devanagari-capable serif.
+   Scoped so the other five pages never fetch this font. */
+.stage[data-subject="hindi"] .title,
+.stage[data-subject="hindi"] .message,
+.stage[data-subject="hindi"] .closing {
+  font-family: "Noto Serif Devanagari", var(--serif);
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -35,8 +96,8 @@ html, body {
 }
 
 body {
-  background: var(--ink-dark);
-  color: var(--code-text);
+  background: var(--world-bg);
+  color: var(--world-text);
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 }
@@ -48,6 +109,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--world-bg);
   transition: background-color 1.4s var(--ease);
 }
 
@@ -82,8 +144,8 @@ body {
   gap: 7px;
   padding: 16px 20px;
   border-radius: 3px;
-  background: var(--panel-dark);
-  border: 1px solid var(--panel-line);
+  background: var(--world-panel);
+  border: 1px solid var(--world-edge);
   animation: breathe 3.2s ease-in-out infinite;
 }
 
@@ -91,7 +153,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--panel-line);
+  background: var(--world-edge);
 }
 
 .chip-dot:nth-child(1) { background: #4A3B3B; }
@@ -108,12 +170,12 @@ body {
   font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.02em;
-  color: var(--code-dim);
+  color: var(--world-dim);
 }
 
 .caret {
   display: inline-block;
-  color: var(--code-gold);
+  color: var(--world-a);
   animation: blink 1s steps(1) infinite;
 }
 
@@ -122,7 +184,7 @@ body {
   50%, 100% { opacity: 0; }
 }
 
-/* ---------------- Phase 1: code world ---------------- */
+/* ---------------- Phase 1: the subject's world ---------------- */
 
 .phase-code {
   gap: 0;
@@ -130,8 +192,8 @@ body {
 
 .window {
   width: min(560px, 86vw);
-  background: var(--panel-dark);
-  border: 1px solid var(--panel-line);
+  background: var(--world-panel);
+  border: 1px solid var(--world-edge);
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6);
@@ -148,15 +210,29 @@ body {
   display: flex;
   gap: 6px;
   padding: 10px 14px;
-  background: #1D2130;
-  border-bottom: 1px solid var(--panel-line);
+  background: var(--world-edge);
 }
 
 .window-dot {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--panel-line);
+  background: var(--world-panel);
+}
+
+.world-icon {
+  width: 40px;
+  height: 40px;
+  margin: 20px auto -6px;
+  color: var(--world-a);
+}
+
+.world-icon[hidden] { display: none; }
+
+.world-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .window-body {
@@ -167,14 +243,14 @@ body {
   font-size: clamp(13px, 3.4vw, 15px);
   line-height: 1.85;
   text-align: left;
-  color: var(--code-text);
+  color: var(--world-text);
   white-space: pre-wrap;
   word-break: break-word;
 }
 
-.window-body .line-comment { color: var(--code-dim); }
-.window-body .line-key     { color: var(--code-gold); }
-.window-body .line-val     { color: var(--code-sage); }
+.window-body .line-comment { color: var(--world-dim); }
+.window-body .line-key     { color: var(--world-a); }
+.window-body .line-val     { color: var(--world-b); }
 
 .floaters {
   position: absolute;
@@ -186,7 +262,7 @@ body {
   position: absolute;
   font-family: var(--mono);
   font-size: clamp(12px, 2.6vw, 15px);
-  color: var(--code-dim);
+  color: var(--world-dim);
   opacity: 0;
   animation: floaterIn 0.9s var(--ease) forwards, drift 6s ease-in-out infinite;
 }
@@ -222,8 +298,8 @@ body {
   font-family: var(--serif);
   font-weight: 500;
   font-size: clamp(26px, 6.4vw, 42px);
-  line-height: 1.2;
-  max-width: 14ch;
+  line-height: 1.25;
+  max-width: 16ch;
   opacity: 0;
   transform: translateY(10px);
 }
@@ -232,7 +308,7 @@ body {
   margin: 6px 0 0;
   font-family: var(--serif);
   font-size: clamp(16px, 4vw, 20px);
-  line-height: 1.65;
+  line-height: 1.7;
   color: var(--ink-warm);
   max-width: 34ch;
   white-space: pre-line;
@@ -304,7 +380,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--code-gold);
+  outline: 2px solid var(--world-a);
   outline-offset: 3px;
 }
 

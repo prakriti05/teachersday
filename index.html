@@ -6,18 +6,18 @@
 <title>Happy Teacher's Day</title>
 <meta name="description" content="A small digital greeting.">
 
-<!-- Two typefaces doing two different jobs: JetBrains Mono carries the "code world" phase,
-     Newsreader carries the human, handwritten-feeling message phase. Both are self-hosted-quality
-     Google Fonts (small weight subset only) — the only external dependency in this project. -->
+<!-- JetBrains Mono carries the "code world" phase. Newsreader carries the human,
+     handwritten-feeling message phase. Noto Serif Devanagari is only ever invoked
+     by the Hindi page's CSS, so it's never fetched on the other five pages. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<main class="stage" id="stage">
+<main class="stage" id="stage" data-subject="computer">
 
   <!-- Phase 0: the closed card -->
   <section class="phase phase-closed" id="phase-closed">
@@ -29,7 +29,7 @@
     <p class="hint">tap to open<span class="caret">_</span></p>
   </section>
 
-  <!-- Phase 1: the code world -->
+  <!-- Phase 1: the subject's world -->
   <section class="phase phase-code" id="phase-code" hidden>
     <div class="window">
       <div class="window-bar">
@@ -37,6 +37,7 @@
         <span class="window-dot"></span>
         <span class="window-dot"></span>
       </div>
+      <div class="world-icon" id="world-icon" hidden></div>
       <pre class="window-body" id="terminal-lines" aria-live="polite"></pre>
     </div>
     <div class="floaters" id="floaters" aria-hidden="true"></div>
