@@ -40,7 +40,6 @@ const ICONS = {
 
 const SUBJECTS = {
   computer: {
-    eyebrow: "for the teacher who taught computer science",
     terminal: [
       { text: "> loading_six_years.py", cls: "line-comment" },
       { text: "importing patience, guidance, laughter", cls: "line-val" },
@@ -61,7 +60,6 @@ const SUBJECTS = {
   },
 
   maths: {
-    eyebrow: "for the teacher who taught maths",
     icon: ICONS.compass,
     terminal: [
       { text: "> solving_six_years.eq", cls: "line-comment" },
@@ -83,7 +81,6 @@ const SUBJECTS = {
   },
 
   science: {
-    eyebrow: "for the teacher who taught science",
     icon: ICONS.flask,
     terminal: [
       { text: "> observing_six_years.lab", cls: "line-comment" },
@@ -105,7 +102,6 @@ const SUBJECTS = {
   },
 
   hindi: {
-    eyebrow: "for the teacher who taught hindi",
     icon: ICONS.nib,
     terminal: [
       { text: "> inking_six_years.txt", cls: "line-comment" },
@@ -127,7 +123,6 @@ const SUBJECTS = {
   },
 
   english: {
-    eyebrow: "for the teacher who taught english",
     icon: ICONS.book,
     terminal: [
       { text: "> reading_six_years.txt", cls: "line-comment" },
@@ -149,7 +144,6 @@ const SUBJECTS = {
   },
 
   sst: {
-    eyebrow: "for the teacher who taught social studies",
     icon: ICONS.rose,
     terminal: [
       { text: "> mapping_six_years.geo", cls: "line-comment" },
@@ -185,7 +179,6 @@ const phaseGreeting = document.getElementById("phase-greeting");
 const terminalEl = document.getElementById("terminal-lines");
 const floatersEl = document.getElementById("floaters");
 const iconEl = document.getElementById("world-icon");
-const eyebrowEl = document.getElementById("eyebrow");
 const titleEl = document.getElementById("title");
 const messageEl = document.getElementById("message");
 const closingEl = document.getElementById("closing");
@@ -272,19 +265,17 @@ function goToGreeting() {
 }
 
 function revealGreeting() {
-  eyebrowEl.textContent = subject.eyebrow;
   titleEl.textContent = subject.title;
   messageEl.textContent = subject.message;
   closingEl.textContent = subject.closing;
 
   const stagger = reducedMotion ? 60 : 450;
-  after(() => eyebrowEl.classList.add("reveal-fade"), stagger * 1);
-  after(() => titleEl.classList.add("reveal"), stagger * 2);
-  after(() => messageEl.classList.add("reveal"), stagger * 4);
+  after(() => titleEl.classList.add("reveal"), stagger * 1);
+  after(() => messageEl.classList.add("reveal"), stagger * 3);
   after(() => {
     closingEl.classList.add("reveal-fade");
     finish();
-  }, stagger * 7);
+  }, stagger * 6);
 }
 
 function finish() {
@@ -303,11 +294,9 @@ function skipToEnd() {
   stage.setAttribute("data-world", "paper");
   phaseGreeting.hidden = false;
 
-  eyebrowEl.textContent = subject.eyebrow;
   titleEl.textContent = subject.title;
   messageEl.textContent = subject.message;
   closingEl.textContent = subject.closing;
-  eyebrowEl.classList.add("reveal-fade");
   titleEl.classList.add("reveal");
   messageEl.classList.add("reveal");
   closingEl.classList.add("reveal-fade");
