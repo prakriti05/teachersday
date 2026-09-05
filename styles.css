@@ -66,6 +66,10 @@ body {
   text-align: center;
 }
 
+.phase[hidden] {
+  display: none;
+}
+
 /* ---------------- Phase 0: closed card ---------------- */
 
 .phase-closed {
