@@ -41,6 +41,15 @@ const ICONS = {
     <path d="M18 29v11c0 4.4 6.3 8 14 8s14-3.6 14-8V29"/>
     <line x1="58" y1="25" x2="58" y2="41"/>
   </svg>`,
+  dancer: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="34" cy="10" r="4.5" fill="currentColor" stroke="none"/>
+    <path d="M34 15v14"/>
+    <path d="M34 18 20 10"/>
+    <path d="M34 21 52 26"/>
+    <path d="M34 29 22 50"/>
+    <path d="M34 29 44 44 40 58"/>
+    <path d="M22 50 14 54" />
+  </svg>`,
 };
 
 const SUBJECTS = {
@@ -61,7 +70,7 @@ const SUBJECTS = {
     ],
     title: "Happy Teacher's Day",
     message:
-      "Some lessons had a subject name,\nothers didn't need one—\nthey were just about how to think, how to try again,\nand how to be a little kinder.\n\nThank you for teaching me more than what was ever on the syllabus.",
+      "Some lessons are written in notebooks,\nwhile others stay quietly in our hearts\u2014\nhow to think, how to try again,\nand how to be a little kinder.\n\nThank you for teaching me things that I may not have realised I was learning at the time,\nbut will carry with me for a lifetime.",
     closing: "With gratitude,\nfrom one of your students. \u2764",
   },
 
@@ -187,6 +196,27 @@ const SUBJECTS = {
     title: "Happy Teacher's Day",
     message:
       "From maps and places to stories of the past,\nyou made the world feel a little closer to us.\n\nThank you, Ma'am, for all the lessons, memories, and moments that made our school days special.",
+    closing: "With gratitude,\nfrom one of your students. \u2764",
+  },
+
+  dance: {
+    icon: ICONS.dancer,
+    terminal: [
+      { text: "> choreographing_six_years.set", cls: "line-comment" },
+      { text: "counting patience, rhythm, discipline", cls: "line-val" },
+      { text: "rehearsing every step until it felt right...", cls: "line-key" },
+      { text: "output: gratitude", cls: "line-val" },
+    ],
+    floaters: [
+      { text: "\u266a", top: "16%", left: "10%", delay: 0.9 },
+      { text: "1 2 3 4", top: "72%", left: "12%", delay: 1.3 },
+      { text: "ta thei thei tat", top: "20%", left: "68%", delay: 1.1 },
+      { text: "taal", top: "76%", left: "72%", delay: 1.6 },
+      { text: "encore", top: "48%", left: "6%", delay: 2.0 },
+    ],
+    title: "Happy Teacher's Day",
+    message:
+      "You counted the beats out loud so we wouldn't have to,\nuntil one day we didn't need counting at all.\n\nSir, thank you for teaching me that discipline and\nexpression were never two different things.",
     closing: "With gratitude,\nfrom one of your students. \u2764",
   },
 };

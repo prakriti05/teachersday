@@ -90,6 +90,16 @@
   --world-b:     #7A8FA0;
 }
 
+.stage[data-subject="dance"] {
+  --world-bg:    #1A0E10;
+  --world-panel: #241318;
+  --world-edge:  #3D1F26;
+  --world-text:  #EDD9DC;
+  --world-dim:   #A67883;
+  --world-a:     #D4A54A;
+  --world-b:     #C15B6E;
+}
+
 /* Hindi's title/message/closing need a Devanagari-capable serif.
    Scoped so the other five pages never fetch this font. */
 .stage[data-subject="hindi"] .title,
