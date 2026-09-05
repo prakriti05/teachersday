@@ -30,6 +30,16 @@
 
 /* ---------------- per-subject world themes ---------------- */
 
+.stage[data-subject="common"] {
+  --world-bg:    #14120F;
+  --world-panel: #1E1A15;
+  --world-edge:  #332C22;
+  --world-text:  #E6DDCB;
+  --world-dim:   #97896F;
+  --world-a:     #D4A85A;
+  --world-b:     #9AAE8A;
+}
+
 .stage[data-subject="maths"] {
   --world-bg:    #16211A;
   --world-panel: #1F2E24;

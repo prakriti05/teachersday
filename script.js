@@ -36,9 +36,35 @@ const ICONS = {
     <line x1="6" y1="32" x2="11" y2="32"/>
     <line x1="53" y1="32" x2="58" y2="32"/>
   </svg>`,
+  cap: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 14 58 25 32 36 6 25Z"/>
+    <path d="M18 29v11c0 4.4 6.3 8 14 8s14-3.6 14-8V29"/>
+    <line x1="58" y1="25" x2="58" y2="41"/>
+  </svg>`,
 };
 
 const SUBJECTS = {
+  common: {
+    icon: ICONS.cap,
+    terminal: [
+      { text: "> compiling_six_years.all", cls: "line-comment" },
+      { text: "merging every subject, every class, every year", cls: "line-val" },
+      { text: "linking patience, wisdom, encouragement...", cls: "line-key" },
+      { text: "output: gratitude", cls: "line-val" },
+    ],
+    floaters: [
+      { text: "A+", top: "16%", left: "10%", delay: 0.9 },
+      { text: "\u2713", top: "72%", left: "14%", delay: 1.3 },
+      { text: "\u00a7", top: "20%", left: "78%", delay: 1.1 },
+      { text: "note to self", top: "76%", left: "68%", delay: 1.6 },
+      { text: "class of '26", top: "48%", left: "6%", delay: 2.0 },
+    ],
+    title: "Happy Teacher's Day",
+    message:
+      "Some lessons had a subject name,\nothers didn't need one—\nthey were just about how to think, how to try again,\nand how to be a little kinder.\n\nThank you for teaching me more than what was ever on the syllabus.",
+    closing: "With gratitude,\nfrom one of your students. \u2764",
+  },
+
   computer: {
     terminal: [
       { text: "> loading_six_years.py", cls: "line-comment" },
@@ -166,8 +192,8 @@ const SUBJECTS = {
 };
 
 const params = new URLSearchParams(location.search);
-const requested = (params.get("subject") || "computer").toLowerCase();
-const subjectKey = SUBJECTS[requested] ? requested : "computer";
+const requested = (params.get("subject") || "common").toLowerCase();
+const subjectKey = SUBJECTS[requested] ? requested : "common";
 const subject = SUBJECTS[subjectKey];
 
 const stage = document.getElementById("stage");
