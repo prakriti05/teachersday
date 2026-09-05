@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Teacher's Day</title>
+<meta name="description" content="A small digital greeting.">
+
+<!-- Two typefaces doing two different jobs: JetBrains Mono carries the "code world" phase,
+     Newsreader carries the human, handwritten-feeling message phase. Both are self-hosted-quality
+     Google Fonts (small weight subset only) — the only external dependency in this project. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main class="stage" id="stage">
+
+  <!-- Phase 0: the closed card -->
+  <section class="phase phase-closed" id="phase-closed">
+    <div class="chip">
+      <span class="chip-dot"></span>
+      <span class="chip-dot"></span>
+      <span class="chip-dot"></span>
+    </div>
+    <p class="hint">tap to open<span class="caret">_</span></p>
+  </section>
+
+  <!-- Phase 1: the code world -->
+  <section class="phase phase-code" id="phase-code" hidden>
+    <div class="window">
+      <div class="window-bar">
+        <span class="window-dot"></span>
+        <span class="window-dot"></span>
+        <span class="window-dot"></span>
+      </div>
+      <pre class="window-body" id="terminal-lines" aria-live="polite"></pre>
+    </div>
+    <div class="floaters" id="floaters" aria-hidden="true"></div>
+  </section>
+
+  <!-- Phase 2: the greeting -->
+  <section class="phase phase-greeting" id="phase-greeting" hidden>
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 class="title" id="title"></h1>
+    <p class="message" id="message"></p>
+    <p class="closing" id="closing"></p>
+  </section>
+
+</main>
+
+<button class="skip" id="skip" type="button">skip</button>
+
+<script src="script.js"></script>
+</body>
+</html>

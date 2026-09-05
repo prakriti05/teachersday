@@ -1,0 +1,311 @@
+/* ============================================================
+   Teacher's Day — shared design tokens
+   Two worlds: a quiet terminal/code world, and a warm paper world.
+   The whole piece is the transition between them.
+   ============================================================ */
+
+:root {
+  /* code world */
+  --ink-dark:      #10121A;
+  --panel-dark:    #171A24;
+  --panel-line:    #262B3A;
+  --code-text:     #C7D0E0;
+  --code-dim:      #6B7387;
+  --code-gold:     #D9A85C;
+  --code-sage:     #8FB89A;
+
+  /* paper world */
+  --paper:         #F3ECDD;
+  --paper-edge:    #E9DFC9;
+  --ink-warm:      #2C2418;
+  --ink-soft:      #6E6350;
+  --accent-warm:   #B9793F;
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono:  "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--ink-dark);
+  color: var(--code-text);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 1.4s var(--ease);
+}
+
+.stage[data-world="paper"] {
+  background: var(--paper);
+}
+
+.phase {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8vh 7vw;
+  text-align: center;
+}
+
+/* ---------------- Phase 0: closed card ---------------- */
+
+.phase-closed {
+  cursor: pointer;
+  gap: 22px;
+}
+
+.chip {
+  display: flex;
+  gap: 7px;
+  padding: 16px 20px;
+  border-radius: 3px;
+  background: var(--panel-dark);
+  border: 1px solid var(--panel-line);
+  animation: breathe 3.2s ease-in-out infinite;
+}
+
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--panel-line);
+}
+
+.chip-dot:nth-child(1) { background: #4A3B3B; }
+.chip-dot:nth-child(2) { background: #4A452F; }
+.chip-dot:nth-child(3) { background: #2F4A38; }
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.hint {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--code-dim);
+}
+
+.caret {
+  display: inline-block;
+  color: var(--code-gold);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* ---------------- Phase 1: code world ---------------- */
+
+.phase-code {
+  gap: 0;
+}
+
+.window {
+  width: min(560px, 86vw);
+  background: var(--panel-dark);
+  border: 1px solid var(--panel-line);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,0.6);
+  transform: scale(0.94);
+  opacity: 0;
+  animation: rise 0.7s var(--ease) forwards;
+}
+
+@keyframes rise {
+  to { transform: scale(1); opacity: 1; }
+}
+
+.window-bar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #1D2130;
+  border-bottom: 1px solid var(--panel-line);
+}
+
+.window-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--panel-line);
+}
+
+.window-body {
+  margin: 0;
+  padding: 26px 24px 32px;
+  min-height: 148px;
+  font-family: var(--mono);
+  font-size: clamp(13px, 3.4vw, 15px);
+  line-height: 1.85;
+  text-align: left;
+  color: var(--code-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.window-body .line-comment { color: var(--code-dim); }
+.window-body .line-key     { color: var(--code-gold); }
+.window-body .line-val     { color: var(--code-sage); }
+
+.floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.floater {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: clamp(12px, 2.6vw, 15px);
+  color: var(--code-dim);
+  opacity: 0;
+  animation: floaterIn 0.9s var(--ease) forwards, drift 6s ease-in-out infinite;
+}
+
+@keyframes floaterIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 0.55; transform: translateY(0); }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ---------------- Phase 2: the greeting (paper world) ---------------- */
+
+.phase-greeting {
+  gap: 18px;
+  color: var(--ink-warm);
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--accent-warm);
+  opacity: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(26px, 6.4vw, 42px);
+  line-height: 1.2;
+  max-width: 14ch;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.message {
+  margin: 6px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(16px, 4vw, 20px);
+  line-height: 1.65;
+  color: var(--ink-warm);
+  max-width: 34ch;
+  white-space: pre-line;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.closing {
+  margin: 22px 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(14px, 3.4vw, 16px);
+  color: var(--ink-soft);
+  white-space: pre-line;
+  opacity: 0;
+}
+
+.reveal {
+  animation: revealUp 0.9s var(--ease) forwards;
+}
+
+@keyframes revealUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-fade {
+  animation: revealFade 1s var(--ease) forwards;
+}
+
+@keyframes revealFade {
+  to { opacity: 1; }
+}
+
+/* ---------------- Skip control ---------------- */
+
+.skip {
+  position: fixed;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: 18px;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.28);
+  padding: 8px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.stage[data-world="paper"] ~ .skip {
+  color: rgba(44,36,24,0.3);
+}
+
+.skip:hover { color: rgba(255,255,255,0.55); }
+.stage[data-world="paper"] ~ .skip:hover { color: rgba(44,36,24,0.55); }
+
+.skip[hidden] { display: none; }
+
+/* ---------------- Motion & accessibility ---------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--code-gold);
+  outline-offset: 3px;
+}
+
+/* ---------------- Small screens ---------------- */
+
+@media (max-width: 380px) {
+  .window-body { padding: 20px 18px 26px; }
+}
